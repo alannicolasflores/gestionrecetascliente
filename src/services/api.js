@@ -16,14 +16,17 @@ export const fetchRecetas = async () => {
 };
 
 // Función para crear una nueva receta
-export const createReceta = async (data) => {
-  try {
-    const response = await axiosInstance.post('/recetas', data);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response?.data?.message || 'Error al crear la receta');
+export const createReceta = async (newReceta) => {
+  const response = await axiosInstance.post('/recetas', newReceta); // Usa axiosInstance para la solicitud POST
+
+  if (!response.data) {
+    throw new Error('Error al crear receta');
   }
+
+  return response.data; // Retorna los datos de la receta creada
 };
+
+
 
 // Función para obtener una receta por ID
 export const fetchRecetaById = async (id) => {
