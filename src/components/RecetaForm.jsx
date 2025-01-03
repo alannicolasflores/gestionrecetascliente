@@ -1,7 +1,11 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const RecetaForm = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({ nombre: '', descripcion: '' });
+const RecetaForm = ({ onSubmit, initialData = { nombre: '', descripcion: '' } }) => {
+  const [formData, setFormData] = useState(initialData);
+
+  useEffect(() => {
+    setFormData(initialData); // Actualiza el estado cuando cambian los datos iniciales
+  }, [initialData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -9,10 +13,8 @@ const RecetaForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos del formulario:", formData);  // Verifica si los datos son correctos
     onSubmit(formData);
   };
-  
 
   return (
     <form onSubmit={handleSubmit} className="p-4 shadow-lg rounded-3 bg-light">

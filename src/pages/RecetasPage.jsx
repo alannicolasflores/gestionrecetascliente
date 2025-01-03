@@ -1,12 +1,33 @@
-import { useQuery } from '@tanstack/react-query';
-import { fetchRecetas } from '../services/api';
-import { Link } from 'react-router-dom';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { fetchRecetas, deleteReceta } from '../services/api';
+import { Link, useNavigate } from 'react-router-dom';
 
 const RecetasPage = () => {
-  const { data, isLoading, isError, error } = useQuery({
+  const navigate = useNavigate();
+
+  // Fetch de recetas
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['recetas'],
     queryFn: fetchRecetas,
   });
+
+  // Mutación para eliminar receta
+  const mutation = useMutation({
+    mutationFn: deleteReceta,
+    onSuccess: () => {
+      alert('Receta eliminada con éxito.');
+      refetch(); // Refresca la lista de recetas
+    },
+    onError: (error) => {
+      alert('Hubo un problema al eliminar la receta: ' + error.message);
+    },
+  });
+
+  const handleDelete = (id) => {
+    if (window.confirm('¿Estás seguro de eliminar esta receta?')) {
+      mutation.mutate(id); // Ejecuta la mutación de eliminar
+    }
+  };
 
   if (isLoading) return <p>Cargando recetas...</p>;
   if (isError) return <p>Error al cargar las recetas: {error.message}</p>;
@@ -17,7 +38,7 @@ const RecetasPage = () => {
     <div
       className="container py-5"
       style={{
-        background: 'url("https://www.toptal.com/designers/subtlepatterns/patterns/figured_paper.png")', // Cambia el patrón si prefieres otro
+        background: 'url("https://www.toptal.com/designers/subtlepatterns/patterns/figured_paper.png")',
         backgroundSize: 'cover',
         padding: '60px 0',
       }}
@@ -49,6 +70,22 @@ const RecetasPage = () => {
                 <div className="card-body p-4">
                   <h5 className="card-title">{receta.nombre}</h5>
                   <p className="card-text">{receta.descripcion}</p>
+                  <div className="d-flex justify-content-between mt-3">
+                    {/* Botón para editar */}
+                    <button
+                      className="btn btn-sm btn-warning"
+                      onClick={() => navigate(`/recetas/editar/${receta.id}`)}
+                    >
+                      Editar
+                    </button>
+                    {/* Botón para eliminar */}
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(receta.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
