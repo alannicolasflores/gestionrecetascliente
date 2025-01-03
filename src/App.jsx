@@ -9,6 +9,12 @@ import EditarProveedorPage from './pages/EditarProveedorPage';
 import PedidosPage from './pages/PedidosPage';
 import CrearPedidoPage from './pages/CrearPedidoPage';
 import EditarPedidoPage from './pages/EditarPedidoPage';
+import MenusPage from './pages/MenusPage';
+import CrearMenuPage from './pages/CrearMenuPage';
+import EditarMenuPage from './pages/EditarMenuPage';
+import IngredientesPage from './pages/IngredientesPage';
+import CrearIngredientePage from './pages/CrearIngredientePage';
+import EditarIngredientePage from './pages/EditarIngredientePage';
 
 const App = () => {
   return (
@@ -30,6 +36,13 @@ const App = () => {
           <Route path="/pedidos" element={<PedidosPage />} />
           <Route path="/pedidos/crear" element={<CrearPedidoPage />} />
           <Route path="/pedidos/editar/:id" element={<EditarPedidoPage />} />
+          <Route path="/menus" element={<MenusPage />} />
+          <Route path="/menus/crear" element={<CrearMenuPage />} />
+          <Route path="/menus/editar/:id" element={<EditarMenuPage />} />
+
+          <Route path="/ingredientes" element={<IngredientesPage />} />
+          <Route path="/ingredientes/crear" element={<CrearIngredientePage />} />
+          <Route path="/ingredientes/editar/:id" element={<EditarIngredientePage />} />
 
         </Routes>
       </main>

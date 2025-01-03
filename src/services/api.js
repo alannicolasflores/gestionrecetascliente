@@ -132,3 +132,53 @@ export const updatePedido = async (id, updatedPedido) => {
     throw new Error(error.response?.data?.message || 'Error al actualizar pedido');
   }
 };
+
+// Menús
+export const fetchMenus = async () => {
+  const response = await axiosInstance.get('/menus');
+  return response.data;
+};
+
+export const createMenu = async (newMenu) => {
+  const response = await axiosInstance.post('/menus', newMenu);
+  return response.data;
+};
+
+export const fetchMenuById = async (id) => {
+  const response = await axiosInstance.get(`/menus/${id}`);
+  return response.data;
+};
+
+export const deleteMenu = async (id) => {
+  await axiosInstance.delete(`/menus/${id}`);
+};
+
+export const updateMenu = async (id, updatedMenu) => {
+  const response = await axiosInstance.put(`/menus/${id}`, updatedMenu);
+  return response.data;
+};
+
+// Ingredientes
+export const fetchIngredientes = async () => {
+  const response = await axiosInstance.get('/ingredientes');
+  return response.data;
+};
+
+export const createIngrediente = async (newIngrediente) => {
+  const response = await axiosInstance.post('/ingredientes', newIngrediente);
+  return response.data;
+};
+
+export const fetchIngredienteById = async (id) => {
+  const response = await axiosInstance.get(`/ingredientes/${id}`);
+  return response.data;
+};
+
+export const deleteIngrediente = async (id) => {
+  await axiosInstance.delete(`/ingredientes/${id}`);
+};
+
+export const updateIngrediente = async (id, updatedIngrediente) => {
+  const response = await axiosInstance.put(`/ingredientes/${id}`, updatedIngrediente);
+  return response.data;
+};
