@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { createReceta } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react'; 
 import RecetaForm from '../components/RecetaForm';
 import { Link } from 'react-router-dom';
 
@@ -19,6 +20,11 @@ const CrearRecetaPage = () => {
       alert('Hubo un problema al crear la receta.');
     },
   });
+
+  const initialData = useMemo(
+    () => ({ nombre: '', descripcion: '' }), 
+    []
+  );
 
   const handleSubmit = (data) => {
     mutation.mutate(data);

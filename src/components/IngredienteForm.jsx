@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const IngredienteForm = ({ onSubmit, initialData = { nombre: '', cantidad: 0 } }) => {
   const [formData, setFormData] = useState(initialData);
 
-  useEffect(() => {
-    setFormData(initialData);
-  }, [initialData]);
-
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const value = e.target.name === "cantidad" ? Number(e.target.value) : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
   };
 
   const handleSubmit = (e) => {
