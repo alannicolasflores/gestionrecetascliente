@@ -36,7 +36,7 @@ const EditarMenuPage = () => {
   return (
     <div className="container py-5">
       <h1>Editar Menú</h1>
-      <MenuForm onSubmit={handleSubmit} initialData={data} />
+      <MenuForm onSubmit={handleSubmit} initialData={data || { nombre: '' }} />
     </div>
   );
 };

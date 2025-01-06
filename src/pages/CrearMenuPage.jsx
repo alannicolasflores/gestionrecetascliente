@@ -22,8 +22,21 @@ const CrearMenuPage = () => {
   };
 
   return (
-    <div>
-      <h1>Crear Menú</h1>
+    <div className="container py-5">
+      <h1 className="text-center mb-4 text-info">Crear Menú</h1>
+
+      {/* Enlace para regresar a la página anterior */}
+      <div className="d-flex justify-content-start mb-4">
+        <button 
+          className="back-to-home d-flex align-items-center btn btn-link"
+          onClick={() => navigate(-1)} // Regresar a la página anterior
+        >
+          <i className="bi bi-arrow-left me-2"></i>
+          <span>Volver a la Página Anterior</span>
+        </button>
+      </div>
+
+      {/* Formulario de creación de menú */}
       <MenuForm onSubmit={handleSubmit} />
     </div>
   );

@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const MenuForm = ({ onSubmit, initialData = { nombre: '' } }) => {
-  
   const [formData, setFormData] = useState(initialData);
+
+  // Si `initialData` cambia, actualiza el estado del formulario
+  useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

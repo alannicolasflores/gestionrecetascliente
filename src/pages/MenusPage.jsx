@@ -1,3 +1,4 @@
+import React from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { fetchMenus, deleteMenu } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
@@ -5,16 +6,19 @@ import { Link, useNavigate } from 'react-router-dom';
 const MenusPage = () => {
   const navigate = useNavigate();
 
+  // Cargar menús
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['menus'],
     queryFn: fetchMenus,
+    // Hacer que el refetch sea automático en la página cuando se vuelva a cargar
   });
 
+  // Mutación para eliminar menú
   const mutation = useMutation({
     mutationFn: deleteMenu,
     onSuccess: () => {
       alert('Menú eliminado con éxito.');
-      refetch();
+      refetch(); // Asegúrate de que refetch esté funcionando
     },
     onError: (err) => {
       alert('Error al eliminar menú: ' + err.message);
