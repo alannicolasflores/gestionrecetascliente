@@ -36,6 +36,13 @@ const EditarProveedorPage = () => {
     <div className="container py-5">
       <h1 className="mb-4">Editar Proveedor</h1>
       <ProveedorForm onSubmit={handleSubmit} initialData={data} />
+
+      {/* Enlace para cancelar y regresar */}
+      <div className="mt-3">
+        <button className="btn btn-link" onClick={() => navigate(-1)}>
+          Cancelar
+        </button>
+      </div>
     </div>
   );
 };

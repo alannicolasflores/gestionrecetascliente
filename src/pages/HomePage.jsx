@@ -10,7 +10,7 @@ const HomePage = () => {
         src={img1}
         alt="Restaurante"
         className="img-fluid rounded-circle mb-4 animate__animated animate__fadeIn"
-        style={{ maxWidth: '350px' }}
+        style={{ maxWidth: '450px' }}
       />
 
       {/* Título sin tarjeta */}

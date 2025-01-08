@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { fetchMenus, deleteMenu } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
+import fondoImage from '../imagenes/menu.png'; // Imagen para el encabezado
 
 const MenusPage = () => {
   const navigate = useNavigate();
@@ -10,7 +11,6 @@ const MenusPage = () => {
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['menus'],
     queryFn: fetchMenus,
-    // Hacer que el refetch sea automático en la página cuando se vuelva a cargar
   });
 
   // Mutación para eliminar menú
@@ -18,7 +18,7 @@ const MenusPage = () => {
     mutationFn: deleteMenu,
     onSuccess: () => {
       alert('Menú eliminado con éxito.');
-      refetch(); // Asegúrate de que refetch esté funcionando
+      refetch();
     },
     onError: (err) => {
       alert('Error al eliminar menú: ' + err.message);
@@ -38,7 +38,21 @@ const MenusPage = () => {
 
   return (
     <div className="container py-5">
-      <h1 className="text-center mb-4 text-info">Menús</h1>
+      {/* Imagen justo encima del título */}
+      <div 
+        className="mb-4 text-center" 
+        style={{
+          backgroundImage: `url(${fondoImage})`, 
+          backgroundSize: 'contain', // Ajusta la imagen para que se vea completa sin recortes
+          backgroundPosition: 'center',
+          width: '100%', // Ajusta el ancho al 100% del contenedor
+          height: '250px', // Ajusta la altura de la imagen
+          borderRadius: '10px', // Añadir bordes redondeados a la imagen
+          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita si no ocupa todo el espacio
+        }}
+      />
+      
+      {/* Título de la página */}
 
       <div className="d-flex justify-content-start mb-4">
         <Link to="/" className="back-to-home d-flex align-items-center">

@@ -3,18 +3,18 @@ import React, { useState, useEffect } from 'react';
 const MenuForm = ({ onSubmit, initialData = { nombre: '' } }) => {
   const [formData, setFormData] = useState(initialData);
 
-  // Si `initialData` cambia, actualiza el estado del formulario
+  // Usamos useEffect solo para inicializar formData cuando se monta el componente
   useEffect(() => {
-    setFormData(initialData);
-  }, [initialData]);
+    setFormData(initialData); // Inicializamos formData solo al montar
+  }, []); // Lo ejecutamos solo una vez cuando el componente se monta
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value }); // Actualizar el valor de nombre
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit(formData); // Pasa los datos del formulario al componente padre
   };
 
   return (
@@ -27,9 +27,10 @@ const MenuForm = ({ onSubmit, initialData = { nombre: '' } }) => {
           id="nombre"
           name="nombre"
           value={formData.nombre}
-          onChange={handleChange}
+          onChange={handleChange} // Llama a handleChange cuando el valor cambie
         />
       </div>
+
       <button type="submit" className="btn btn-primary">Guardar</button>
     </form>
   );

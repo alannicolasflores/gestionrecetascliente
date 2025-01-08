@@ -37,6 +37,13 @@ const EditarIngredientePage = () => {
     <div className="container py-5">
       <h1>Editar Ingrediente</h1>
       <IngredienteForm onSubmit={handleSubmit} initialData={data} />
+      
+      {/* Enlace para cancelar y regresar */}
+      <div className="mt-3">
+        <button className="btn btn-link" onClick={() => navigate(-1)}>
+          Cancelar
+        </button>
+      </div>
     </div>
   );
 };

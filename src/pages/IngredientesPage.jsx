@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { fetchIngredientes, deleteIngrediente } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
+import ingredientesImage from '../imagenes/ingredientes.png'; // Imagen de los ingredientes
 
 const IngredientesPage = () => {
   const navigate = useNavigate();
@@ -34,7 +35,32 @@ const IngredientesPage = () => {
 
   return (
     <div className="container py-5">
-      <h1 className="text-center mb-4 text-info">Ingredientes</h1>
+      {/* Imagen principal con título superpuesto */}
+      <div className="position-relative text-center mb-5">
+        <img
+          src={ingredientesImage}
+          alt="Ingredientes"
+          className="img-fluid rounded shadow"
+          style={{
+            width: '100%', // Se ajusta al 100% del contenedor
+            maxWidth: '1000px', // Se puede modificar el valor para hacerla más ancha
+            height: '300px', // Mantener la relación de aspecto
+          }}
+        />
+        <h1
+          className="position-absolute text-white"
+          style={{
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            fontSize: 'clamp(2.5rem, 5vw, 5rem)', // Tamaño adaptable
+            fontWeight: 'bold',
+            textShadow: '3px 3px 8px rgba(0, 0, 0, 0.7)',
+          }}
+        >
+          Ingredientes
+        </h1>
+      </div>
 
       <div className="d-flex justify-content-start mb-4">
         <Link to="/" className="back-to-home d-flex align-items-center">
@@ -60,7 +86,9 @@ const IngredientesPage = () => {
               <div className="recipe-card shadow-lg border-0 rounded-lg overflow-hidden h-100">
                 <div className="card-body p-4">
                   <h5 className="card-title">{ingrediente.nombre}</h5>
-                  <p className="card-text">Cantidad: {ingrediente.cantidad}</p>
+                  <p className="card-text" style={{ color: 'white' }}>
+                    Cantidad: {ingrediente.cantidad}
+                  </p>
                   <div className="d-flex justify-content-between mt-3">
                     <button
                       className="btn btn-sm btn-warning"

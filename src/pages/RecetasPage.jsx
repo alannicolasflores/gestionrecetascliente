@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { fetchRecetas, deleteReceta } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
+import recetaImg from '../imagenes/image.png'; // Importar la imagen principal
 
 const RecetasPage = () => {
   const navigate = useNavigate();
@@ -43,17 +44,35 @@ const RecetasPage = () => {
         padding: '60px 0',
       }}
     >
-      <h1 className="text-center mb-4 text-info">Recetas</h1>
+      {/* Imagen principal con título superpuesto */}
+      <div className="position-relative text-center mb-5">
+        <img
+          src={recetaImg}
+          alt="Recetas principales"
+          className="img-fluid rounded shadow"
+          style={{ maxWidth: '100%', height: 'auto' }}
+        />
+        <h1
+  className="position-absolute text-white"
+  style={{
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontSize: 'clamp(2.5rem, 5vw, 5rem)', // Tamaño adaptable
+    fontWeight: 'bold',
+    textShadow: '3px 3px 8px rgba(0, 0, 0, 0.7)',
+  }}
+>
+  Recetas
+</h1>
 
-      <div className="d-flex justify-content-start mb-4">
-        <Link to="/" className="back-to-home d-flex align-items-center">
-          <i className="bi bi-house-door me-2"></i>
-          <span>Volver a la Página Principal</span>
-        </Link>
       </div>
 
-      <div className="d-flex justify-content-end mb-4">
-        <Link to="/recetas/crear" className="btn btn-lg btn-primary d-flex align-items-center">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <Link to="/" className="btn btn-outline-dark d-flex align-items-center">
+          <i className="bi bi-house-door me-2"></i> Volver a la Página Principal
+        </Link>
+        <Link to="/recetas/crear" className="btn btn-lg btn-success d-flex align-items-center shadow-sm">
           <i className="bi bi-plus-circle me-2"></i> Crear Receta
         </Link>
       </div>
@@ -66,21 +85,53 @@ const RecetasPage = () => {
         ) : (
           recetas.map((receta) => (
             <div key={receta.id} className="col-12 col-md-6 col-lg-4 mb-4">
-              <div className="recipe-card shadow-lg border-0 rounded-lg overflow-hidden h-100">
+              <div
+                className="recipe-card shadow border-0 rounded-lg overflow-hidden h-100"
+                style={{
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  background: '#ffffff',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px)';
+                  e.currentTarget.style.boxShadow = '0px 8px 20px rgba(0, 0, 0, 0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0px 4px 10px rgba(0, 0, 0, 0.1)';
+                }}
+              >
+                <div
+                  className="card-header"
+                  style={{
+                    background: 'linear-gradient(135deg, rgb(17, 175, 203) 0%, rgb(100, 157, 255) 100%)',
+                    color: '#fff',
+                    textAlign: 'center',
+                    padding: '15px',
+                  }}
+                >
+                  <h5 className="card-title mb-0">{receta.nombre}</h5>
+                </div>
                 <div className="card-body p-4">
-                  <h5 className="card-title">{receta.nombre}</h5>
-                  <p className="card-text">{receta.descripcion}</p>
+                  <p
+                    className="card-text"
+                    style={{
+                      color: '#FFF', 
+                      fontWeight: '500',
+                    }}
+                  >
+                    {receta.descripcion}
+                  </p>
                   <div className="d-flex justify-content-between mt-3">
                     {/* Botón para editar */}
                     <button
-                      className="btn btn-sm btn-warning"
+                      className="btn btn-sm btn-warning shadow-sm"
                       onClick={() => navigate(`/recetas/editar/${receta.id}`)}
                     >
                       Editar
                     </button>
                     {/* Botón para eliminar */}
                     <button
-                      className="btn btn-sm btn-danger"
+                      className="btn btn-sm btn-danger shadow-sm"
                       onClick={() => handleDelete(receta.id)}
                     >
                       Eliminar
