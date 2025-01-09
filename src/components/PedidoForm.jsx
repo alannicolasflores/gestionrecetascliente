@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const PedidoForm = ({ onSubmit, initialData = { fecha: '', estado: '' } }) => {
-  // Inicializamos el estado una sola vez
-  const [formData, setFormData] = useState(initialData);
+  const [formData, setFormData] = useState({
+    fecha: initialData.fecha ? new Date(initialData.fecha) : null,
+    estado: initialData.estado,
+  });
+
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, fecha: date });
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -10,20 +18,23 @@ const PedidoForm = ({ onSubmit, initialData = { fecha: '', estado: '' } }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit({
+      ...formData,
+      fecha: formData.fecha ? formData.fecha.toISOString() : '',
+    });
   };
 
   return (
     <form onSubmit={handleSubmit} className="p-4 shadow-lg rounded-3 bg-light">
       <div className="mb-3">
-        <label htmlFor="fecha" className="form-label">Fecha</label>
-        <input
-          type="datetime-local"
+        <label htmlFor="fecha" className="form-label">Fecha y Hora</label>
+        <DatePicker
+          selected={formData.fecha}
+          onChange={handleDateChange}
+          showTimeSelect
+          dateFormat="Pp"
           className="form-control"
-          id="fecha"
-          name="fecha"
-          value={formData.fecha}
-          onChange={handleChange}
+          placeholderText="Selecciona una fecha y hora"
         />
       </div>
       <div className="mb-3">
