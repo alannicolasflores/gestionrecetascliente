@@ -9,7 +9,6 @@ export default defineConfig({
       '/api': {
         target: 'http://20.102.104.104:8080', // Dirección del backend
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '') // Elimina '/api' de la URL
       }
     }
   },
@@ -18,4 +17,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  base: '/gestionrecetascliente/', // Nombre del repositorio
 });
