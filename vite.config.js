@@ -17,5 +17,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: '/gestionrecetascliente/', // Nombre del repositorio
 });
