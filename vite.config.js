@@ -4,6 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  base: 'https://alannicolasflores.github.io/gestionrecetascliente/', // Base URL para GitHub Pages
   server: {
     proxy: {
       '/api': {
