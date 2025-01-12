@@ -13,12 +13,13 @@ export default defineConfig({
       '/api': {
         target: 'http://20.102.104.104:8080', // Dirección del backend
         changeOrigin: true,
-      }
-    }
+        rewrite: (path) => path.replace(/^\/api/, ''), // Reescribe la URL si es necesario
+      },
+    },
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './src'), // Alias para la carpeta src
     },
   },
 });
