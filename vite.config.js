@@ -4,7 +4,10 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: 'https://alannicolasflores.github.io/gestionrecetascliente/', // Base URL para GitHub Pages
+  base: '/gestionrecetascliente/', // Ruta relativa para GitHub Pages
+  build: {
+    sourcemap: true, // Habilitar source maps para depuración
+  },
   server: {
     proxy: {
       '/api': {
