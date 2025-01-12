@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Instancia de Axios con la configuración base
 const axiosInstance = axios.create({
-  baseURL: 'https://20.102.104.104:8080/api',
+  baseURL: 'https://20.102.104.104/api',
 });
 
 // Función para obtener todas las recetas
